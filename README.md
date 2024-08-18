@@ -35,5 +35,5 @@ Xác định các nhóm thành phần
 - Input
 - Icon
 
-chuyển giao diện sanng, vẽ hoàn thiện
+chuyển giao diện sang, vẽ hoàn thiện
 tạo component chung, tái sử dụng, binding 2 chiều, ẩn hiện
