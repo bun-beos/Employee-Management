@@ -28,7 +28,7 @@ export const getEmployeeAsync = async (id) => {
 
 export const filterEmployeeAsync = async (pageSize, pageNumber, name, code, phoneNumber) => {
     try {
-        const res = await api.get(`/Employees/Filter?pageSize=${pageSize}&pageNumber=${pageNumber}&name=${name}&code=${code}&phoneNumber=${phoneNumber}`)
+        const res = await api.get(`/Employees/Filter?pageSize=${pageSize}&pageNumber=${pageNumber}&fullName=${name}&employeeCode=${code}&phoneNumber=${phoneNumber}`)
         return res.data
     }
     catch (error) {
