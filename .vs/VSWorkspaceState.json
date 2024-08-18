@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\components",
+    "\\src\\views",
+    "\\src\\views\\employee"
+  ],
+  "SelectedNode": "\\src\\views\\employee\\EmployeeList.vue",
+  "PreviewInSolutionExplorer": false
+}

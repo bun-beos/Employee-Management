@@ -1,0 +1,35 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    background-color: #fff;
+}
+
+.header .title {
+    height: 56px;
+    width: 500px;
+    line-height: 56px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.body {
+    padding: 12px;
+    height: calc(100vh - 56px);
+}
+
+.body .body-content {
+    background-color: #fff;
+    height: 100%;
+    padding: 16px;
+}
+
+.body-content .date-format {
+    width: 250px;
+    height: 180px;
+    padding: 12px;
+    border: 1px solid var(--input-placeholder-color);
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px #767676;
+}
