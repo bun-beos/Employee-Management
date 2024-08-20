@@ -2,10 +2,7 @@
   <div class="table-content">
     <!-- Công cụ điều khiển bảng -->
     <div class="table-control">
-      <div
-        class="left-control"
-        v-show="this.checkBoxArray.length || this.checkBoxArray === true"
-      >
+      <div class="left-control" v-show="this.checkBoxArray.length || this.checkBoxArray === true">
         <div class="checked-number">
           Đã chọn
           <b>{{
@@ -15,48 +12,24 @@
           }}</b>
         </div>
         <div class="clear-check" @click="onCancelChecked">Bỏ chọn</div>
-        <div
-          class="select-all"
-          @click="onCheckAll"
-          v-if="this.checkBoxTHead === true"
-        >
+        <div class="select-all" @click="onCheckAll" v-if="this.checkBoxTHead === true">
           Chọn tất cả
         </div>
-        <div
-          class="action-tbl"
-          @click="onDeleteAllSelected"
-          v-show="this.checkBoxArray.length > 0 || this.checkBoxArray === true"
-        >
-          <m-icon
-            :boxIconType="'box-icon-trash'"
-            :iconType="'icon-trash'"
-          ></m-icon>
+        <div class="action-tbl" @click="onDeleteAllSelected"
+          v-show="this.checkBoxArray.length > 0 || this.checkBoxArray === true">
+          <m-icon :boxIconType="'box-icon-trash'" :iconType="'icon-trash'"></m-icon>
           <div class="action-content">Xóa tất cả</div>
         </div>
       </div>
 
       <div class="right-control">
-        <m-input-icon
-          ref="inputSearch"
-          :placeholder="'Tìm theo mã, tên nhân viên'"
-          :boxIconType="'box-icon-search'"
-          :iconType="'icon-search'"
-          v-model="inputSearchData"
-          @onClickIcon="onSearchData(10, 1)"
-          @keydown.enter="onSearchData(10, 1)"
-        ></m-input-icon>
-        <m-icon
-          :boxIconType="'box-icon-refresh'"
-          :iconType="'icon-refresh'"
-          :tooltip="'Lấy lại dữ liệu'"
-          @click="onRefresh"
-        ></m-icon>
-        <m-icon
-          :boxIconType="'box-icon-excel'"
-          :iconType="'icon-excel'"
-          :tooltip="'Xuất ra Excel'"
-          @click="onExportToExcel"
-        ></m-icon>
+        <m-input-icon ref="inputSearch" :placeholder="'Tìm theo mã, tên nhân viên'" :boxIconType="'box-icon-search'"
+          :iconType="'icon-search'" v-model="inputSearchData" @onClickIcon="onSearchData(10, 1)"
+          @keydown.enter="onSearchData(10, 1)"></m-input-icon>
+        <m-icon :boxIconType="'box-icon-refresh'" :iconType="'icon-refresh'" :tooltip="'Lấy lại dữ liệu'"
+          @click="onRefresh"></m-icon>
+        <m-icon :boxIconType="'box-icon-excel'" :iconType="'icon-excel'" :tooltip="'Xuất ra Excel'"
+          @click="onExportToExcel"></m-icon>
       </div>
     </div>
 
@@ -70,12 +43,7 @@
                 @click="onCheckAll"
                 :length="checkBoxArray.length"
               ></m-input-checkbox> -->
-              <input
-                type="checkbox"
-                @click="onCheckAllInPage"
-                :value="checkBoxTHead"
-                v-model="checkBoxTHead"
-              />
+              <input type="checkbox" @click="onCheckAllInPage" :value="checkBoxTHead" v-model="checkBoxTHead" />
             </th>
             <th class="emp-code">Mã nhân viên</th>
             <th class="emp-full_name">Tên nhân viên</th>
@@ -96,18 +64,10 @@
           </tr>
         </thead>
         <tbody v-if="!isShowTableLoading && !errorGetData">
-          <tr
-            v-for="(employee, index) in employees.Employees"
-            :key="employee.EmployeeId"
-            @dblclick="changeEmployee"
-            :id="index"
-          >
+          <tr v-for="(employee, index) in employees.Employees" :key="employee.EmployeeId" @dblclick="changeEmployee"
+            :id="index">
             <td @dblclick.stop="">
-              <input
-                type="checkbox"
-                :value="employee.EmployeeId"
-                v-model="checkBoxArray"
-              />
+              <input type="checkbox" :value="employee.EmployeeId" v-model="checkBoxArray" />
             </td>
             <td class="emp-code">
               {{ employee.EmployeeCode }}
@@ -144,42 +104,25 @@
             </td>
             <td class="table-function" @dblclick.stop="" :id="index">
               <div class="option-func" :id="index">
-                <div
-                  class="fix-data"
-                  @click="$emit('editEmployee', employee.EmployeeId)"
-                >
+                <div class="fix-data" @click="$emit('editEmployee', employee.EmployeeId)">
                   Sửa
                 </div>
-                <m-icon
-                  :id="employee.EmployeeId"
-                  :class="{
-                    'box-icon_checked':
-                      showDroplistFunc === employee.EmployeeId,
-                  }"
-                  :boxIconType="'box-icon-arrow-down_blue'"
-                  :iconType="'more-option icon-arrow-down_blue'"
-                  @click.stop="onShowDroplistFunc"
-                ></m-icon>
+                <m-icon :id="employee.EmployeeId" :class="{
+                  'box-icon_checked':
+                    showDroplistFunc === employee.EmployeeId,
+                }" :boxIconType="'box-icon-arrow-down_blue'" :iconType="'more-option icon-arrow-down_blue'"
+                  @click.stop="onShowDroplistFunc"></m-icon>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
-      <m-droplist
-        :id="dropListFunId"
-        :showDropList="showDroplistFunc"
-        :droplistType="'droplist-func'"
-        :items="optionFunction"
-        :droplistStyle="droplistStyle"
-        @droplistItemEvent="onRunFunctionInRow"
-      ></m-droplist>
+      <m-droplist :id="dropListFunId" :showDropList="showDroplistFunc" :droplistType="'droplist-func'"
+        :items="optionFunction" :droplistStyle="droplistStyle" @droplistItemEvent="onRunFunctionInRow"></m-droplist>
       <div class="error-get-data" v-show="errorGetData">
         Không tìm thấy được dữ liệu.<br />Vui lòng thử lại.
       </div>
-      <m-loading
-        :spinnerType="'normal'"
-        v-show="isShowTableLoading"
-      ></m-loading>
+      <m-loading :spinnerType="'normal'" v-show="isShowTableLoading"></m-loading>
     </div>
 
     <!-- Điều hướng trang -->
@@ -199,119 +142,66 @@
             {{ pageSizeValue }} bản ghi trên 1 trang
           </div>
           <div class="record-more-option">
-            <m-icon
-              :boxIconType="'box-icon-arrow-down'"
-              :iconType="{
-                'icon-arrow-down': !showDroplistRecord,
-                'icon-arrow-up': showDroplistRecord,
-              }"
-              @click.stop="onShowDroplistRecord"
-            ></m-icon>
+            <m-icon :boxIconType="'box-icon-arrow-down'" :iconType="{
+              'icon-arrow-down': !showDroplistRecord,
+              'icon-arrow-up': showDroplistRecord,
+            }" @click.stop="onShowDroplistRecord"></m-icon>
           </div>
         </div>
-        <m-droplist
-          :droplistType="'droplist-record'"
-          :items="rowInPage"
-          :pageSizeValue="pageSizeValue"
-          v-show="showDroplistRecord"
-          @droplistItemEvent="onChangepageSizeValue"
-        ></m-droplist>
+        <m-droplist :droplistType="'droplist-record'" :items="rowInPage" :pageSizeValue="pageSizeValue"
+          v-show="showDroplistRecord" @droplistItemEvent="onChangepageSizeValue"></m-droplist>
 
         <!-- Chỉ số trang -->
         <div class="page-number">
-          <div
-            class="page-number-control pre-page"
-            :class="{ disable: pageNumber === 1 }"
-            style="margin-right: 8px"
-            @click="onPrePage"
-          >
+          <div class="page-number-control pre-page" :class="{ disable: pageNumber === 1 }" style="margin-right: 8px"
+            @click="onPrePage">
             Trước
           </div>
           <div class="page-index">
-            <div
-              :class="{ 'page-index-item': true, selected: pageNumber === 1 }"
-              @click="onSelectPageNumber"
-            >
+            <div :class="{ 'page-index-item': true, selected: pageNumber === 1 }" @click="onSelectPageNumber">
               1
             </div>
-            <div
-              :class="{ 'page-index-item': true, selected: pageNumber === 2 }"
-              v-show="
-                (pageTotal > 1 && pageTotal <= 4) ||
-                (pageTotal > 4 && pageNumber < 3)
-              "
-              @click="onSelectPageNumber"
-            >
+            <div :class="{ 'page-index-item': true, selected: pageNumber === 2 }" v-show="(pageTotal > 1 && pageTotal <= 4) ||
+              (pageTotal > 4 && pageNumber < 3)
+              " @click="onSelectPageNumber">
               2
             </div>
-            <div
-              class="page-index-item"
-              v-show="pageTotal > 4 && pageNumber >= 3"
-            >
+            <div class="page-index-item" v-show="pageTotal > 4 && pageNumber >= 3">
               ...
             </div>
-            <div
-              class="page-index-item"
-              v-show="pageTotal >= 3 && pageNumber < 3"
-              @click="onSelectPageNumber"
-            >
+            <div class="page-index-item" v-show="pageTotal >= 3 && pageNumber < 3" @click="onSelectPageNumber">
               3
             </div>
-            <div
-              v-for="item in 3"
-              :key="item"
-              v-show="pageNumber >= 3 && pageNumber + 2 < pageTotal"
-              :class="{ 'page-index-item': true, selected: item == 1 }"
-              @click="onSelectPageNumber"
-            >
+            <div v-for="item in 3" :key="item" v-show="pageNumber >= 3 && pageNumber + 2 < pageTotal"
+              :class="{ 'page-index-item': true, selected: item == 1 }" @click="onSelectPageNumber">
               {{ pageNumber + item - 1 }}
             </div>
-            <div
-              class="page-index-item"
-              v-show="pageNumber + 2 < pageTotal && pageTotal > 4"
-            >
+            <div class="page-index-item" v-show="pageNumber + 2 < pageTotal && pageTotal > 4">
               ...
             </div>
-            <div
-              :class="{
-                'page-index-item': true,
-                selected: pageNumber == pageTotal - 2,
-              }"
-              v-show="pageNumber >= pageTotal - 2 && pageTotal > 4"
-              @click="onSelectPageNumber"
-            >
+            <div :class="{
+              'page-index-item': true,
+              selected: pageNumber == pageTotal - 2,
+            }" v-show="pageNumber >= pageTotal - 2 && pageTotal > 4" @click="onSelectPageNumber">
               {{ pageTotal - 2 }}
             </div>
-            <div
-              :class="{
-                'page-index-item': true,
-                selected: pageNumber == pageTotal - 1,
-              }"
-              v-show="
-                (pageNumber >= 3 && pageTotal === 4) ||
+            <div :class="{
+              'page-index-item': true,
+              selected: pageNumber == pageTotal - 1,
+            }" v-show="(pageNumber >= 3 && pageTotal === 4) ||
                 (pageTotal > 4 && pageNumber >= pageTotal - 2)
-              "
-              @click="onSelectPageNumber"
-            >
+                " @click="onSelectPageNumber">
               {{ pageTotal - 1 }}
             </div>
-            <div
-              :class="{
-                'page-index-item': true,
-                selected: pageNumber == pageTotal,
-              }"
-              v-show="pageTotal >= 4"
-              @click="onSelectPageNumber"
-            >
+            <div :class="{
+              'page-index-item': true,
+              selected: pageNumber == pageTotal,
+            }" v-show="pageTotal >= 4" @click="onSelectPageNumber">
               {{ pageTotal }}
             </div>
           </div>
-          <div
-            class="page-number-control after-page"
-            :class="{ disable: pageNumber == pageTotal }"
-            style="margin-left: 8px"
-            @click="onNextPage"
-          >
+          <div class="page-number-control after-page" :class="{ disable: pageNumber == pageTotal }"
+            style="margin-left: 8px" @click="onNextPage">
             Sau
           </div>
         </div>
@@ -676,31 +566,28 @@ export default {
      * author: ttkien (28/09/2023)
      * Hàm xóa một nhân viên
      */
-    onDeleteEmployee(id) {
+    async onDeleteEmployee(id) {
       if (this.employees.Employees.length === 1) {
         this.pageNumber--;
       }
-      this.$axios
-        .delete(`https://localhost:7114/api/v1/Employees/${id}`)
-        .then((res) => {
-          console.log("delete: ", res);
-          this.newToastMsgSuccess(
-            this.$MISAResource["VN"].toastMessage.deleteEmployeeSuccessfull
-          );
-          this.$emit(
-            "getEmployeeInPage",
-            this.pageSizeValue,
-            this.pageNumber,
-            "",
-            "",
-            ""
-          );
-          this.checkBoxArray.shift();
-          this.checkBoxTHead = false;
-        })
-        .catch((error) => {
-          this.newToastMsgError(error);
-        });
+      try {
+        await this.$api.deleteEmployeeAsync(id);
+        this.newToastMsgSuccess(
+          this.$MISAResource["VN"].toastMessage.deleteEmployeeSuccessfull
+        );
+        this.$emit(
+          "getEmployeeInPage",
+          this.pageSizeValue,
+          this.pageNumber,
+          "",
+          "",
+          ""
+        );
+        this.checkBoxArray.shift();
+        this.checkBoxTHead = false;
+      } catch (error) {
+        this.newToastMsgError(error);
+      };
       this.isWaiting = null;
       this.$emit("update:isActionDialog", false);
     },
@@ -709,39 +596,32 @@ export default {
      * author: ttkien (28/09/2023)
      * Hàm xóa nhiều nhân viên
      */
-    onDeleteManyEmployee() {
+    async onDeleteManyEmployee() {
       if (
         this.employees.Employees.length <= this.checkBoxArray.length &&
         this.pageNumber > 1
       ) {
         this.pageNumber--;
       }
-      this.$axios
-        .delete("https://localhost:7114/api/v1/Employees", {
-          data: this.checkBoxArray,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          console.log("delete: ", res);
-          this.$emit(
-            "getEmployeeInPage",
-            this.pageSizeValue,
-            this.pageNumber,
-            "",
-            "",
-            ""
-          );
-          this.newToastMsgSuccess(
-            this.$MISAResource["VN"].toastMessage.deleteEmployeeSuccessfull
-          );
-          this.checkBoxArray = [];
-          this.checkBoxTHead = false;
-        })
-        .catch((error) => {
-          this.newToastMsgError(error);
-        });
+
+      try {
+        await this.$api.deleteManyEmployeeAsync(this.checkBoxArray);
+        this.$emit(
+          "getEmployeeInPage",
+          this.pageSizeValue,
+          this.pageNumber,
+          "",
+          "",
+          ""
+        );
+        this.newToastMsgSuccess(
+          this.$MISAResource["VN"].toastMessage.deleteEmployeeSuccessfull
+        );
+        this.checkBoxArray = [];
+        this.checkBoxTHead = false;
+      } catch (error) {
+        this.newToastMsgError(error);
+      }
       this.isWaiting = null;
       this.$emit("update:isActionDialog", false);
     },
@@ -776,13 +656,12 @@ export default {
      * @param {Guid} id : định danh nhân viên
      * hàm lấy nhân viên theo id
      */
-    getEmployeeById(id) {
-      this.$axios
-        .get(`https://localhost:7114/api/v1/Employees/${id}`)
-        .then((res) => {
-          this.employeeCode = res.data.EmployeeCode;
-        })
-        .catch(this.$helper.showError);
+    async getEmployeeById(id) {
+      try {
+        this.employeeCode = await this.$api.getEmployeeAsync(id).EmployeeCode;
+      } catch (error) {
+        this.$helper.showError(error);
+      }
     },
 
     /**
@@ -828,7 +707,7 @@ export default {
      * author: ttkien (05/10/2023)
      * Hàm export dữ liệu
      */
-    onExportToExcel() {
+    async onExportToExcel() {
       this.$emit("showPageLoading", true);
       let name = "",
         code = "",
@@ -840,29 +719,23 @@ export default {
       } else if (this.inputSearchData !== "") {
         name = this.inputSearchData;
       }
-      this.$axios
-        .get(
-          `https://localhost:7114/api/v1/Employees/Excel?dateFormatValue=${this.$profile.ProfileDateFormat}&name=${name}&code=${code}&phoneNumber=${phoneNumber}`,
-          {
-            responseType: "blob",
-          }
-        )
-        .then((res) => {
-          const blob = new Blob([res.data], {
-            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-          });
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = "Danh_sach_nhan_vien.xlsx";
-          a.click();
-          window.URL.revokeObjectURL(url);
-          this.$emit("showPageLoading", false);
-        })
-        .catch(() => {
-          this.$helper.showError();
-          this.$emit("showPageLoading", false);
+
+      try {
+        const data = await this.$api.exportToExcelAsync(this.$profile.ProfileDateFormat, name, code, phoneNumber)
+        const blob = new Blob([data], {
+          type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Danh_sach_nhan_vien.xlsx";
+        a.click();
+        window.URL.revokeObjectURL(url);
+        this.$emit("showPageLoading", false);
+      } catch (error) {
+        this.$helper.showError(error);
+        this.$emit("showPageLoading", false);
+      }
     },
 
     /**
@@ -893,7 +766,7 @@ export default {
     this.onRefresh();
     this.focusInputSearch();
   },
-  updated() {},
+  updated() { },
 };
 </script>
 

@@ -73,6 +73,17 @@ export const updateEmployeeAsync = async (id, employee) => {
     }
 }
 
+export const exportToExcelAsync = async (dateFormatValue, fullName, employeeCode, phoneNumber) => {
+    try {
+       const res = await api.get(`/Employees/Excel?dateFormatValue=${dateFormatValue}&fullName=${fullName}&employeeCode=${employeeCode}&phoneNumber=${phoneNumber}`, {
+        responseType: 'blob'
+       })
+       return res.data
+    } catch (error) {
+        throw error
+    }
+}
+
 export const getAllDepartmentAsync = async () => {
     try {
         const res = await api.get("/Departments")

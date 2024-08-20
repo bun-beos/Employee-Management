@@ -10,21 +10,11 @@
         </div>
 
         <div style="display: flex">
-          <m-icon
-            tabindex="20"
-            title="Trợ giúp"
-            :boxIconType="'box-icon-question'"
-            :iconType="'icon-question'"
-          ></m-icon>
-          <m-icon
-            tabindex="21"
-            title="Đóng form"
-            :boxIconType="'box-icon-x_L'"
-            :iconType="'icon-x_L'"
-            @click="onCancelForm"
-            @keydown.tab.prevent="onFocusInput('employeeCode')"
-            @keydown.enter.prevent="onCancelForm"
-          ></m-icon>
+          <m-icon tabindex="20" title="Trợ giúp" :boxIconType="'box-icon-question'"
+            :iconType="'icon-question'"></m-icon>
+          <m-icon tabindex="21" title="Đóng form" :boxIconType="'box-icon-x_L'" :iconType="'icon-x_L'"
+            @click="onCancelForm" @keydown.tab.prevent="onFocusInput('employeeCode')"
+            @keydown.enter.prevent="onCancelForm"></m-icon>
         </div>
       </div>
 
@@ -37,79 +27,40 @@
             <div style="display: flex">
               <!-- Mã nhân viên-->
               <div class="emp-code">
-                <label
-                  for="employeeCode"
-                  class="label-required"
-                  @click="onFocusInput('employeeCode')"
-                  >Mã<span class="span-required">*</span></label
-                >
-                <m-input
-                  ref="employeeCode"
-                  v-model="dataEmployeeOutput.EmployeeCode"
-                  :inputError="isInvalidCode"
-                ></m-input>
-                <div
-                  class="input-error-mess"
-                  :class="{ 'tag-hidden': !isEmptyCode }"
-                >
+                <label for="employeeCode" class="label-required" @click="onFocusInput('employeeCode')">Mã<span
+                    class="span-required">*</span></label>
+                <m-input ref="employeeCode" v-model="dataEmployeeOutput.EmployeeCode"
+                  :inputError="isInvalidCode"></m-input>
+                <div class="input-error-mess" :class="{ 'tag-hidden': !isEmptyCode }">
                   Mã không được để trống
                 </div>
               </div>
               <!-- Tên nhân viên-->
               <div class="emp-name">
-                <label
-                  for="fullName"
-                  class="label-required"
-                  @click="onFocusInput('fullName')"
-                  >Tên<span class="span-required">*</span></label
-                >
-                <m-input
-                  ref="fullName"
-                  v-model="dataEmployeeOutput.FullName"
-                  :inputError="isEmptyName"
-                ></m-input>
-                <div
-                  class="input-error-mess"
-                  :class="{ 'tag-hidden': !isEmptyName }"
-                >
+                <label for="fullName" class="label-required" @click="onFocusInput('fullName')">Tên<span
+                    class="span-required">*</span></label>
+                <m-input ref="fullName" v-model="dataEmployeeOutput.FullName" :inputError="isEmptyName"></m-input>
+                <div class="input-error-mess" :class="{ 'tag-hidden': !isEmptyName }">
                   Tên không được để trống
                 </div>
               </div>
             </div>
             <!-- Đơn vị làm việc-->
             <div class="emp-department">
-              <label
-                for="departmentName"
-                class="label-required"
-                @click="onFocusInput('departmentName')"
-                >Đơn vị<span class="span-required">*</span></label
-              >
-              <m-input-combobox
-                ref="departmentName"
-                v-model:isHideCombobox="isHideCombobox"
-                :boxIconType="'box-icon-chevron-down_L'"
-                :iconType="'icon-chevron-down_L'"
-                :items="dataDepartmentNames"
-                v-model="dataEmployeeOutput.DepartmentName"
-                :inputError="isInvalidDepartment"
-                @keydown.tab="isHideCombobox = true"
-              ></m-input-combobox>
-              <div
-                class="input-error-mess"
-                :class="{ 'tag-hidden': !isEmptyDepartment }"
-              >
+              <label for="departmentName" class="label-required" @click="onFocusInput('departmentName')">Đơn vị<span
+                  class="span-required">*</span></label>
+              <m-input-combobox ref="departmentName" v-model:isHideCombobox="isHideCombobox"
+                :boxIconType="'box-icon-chevron-down_L'" :iconType="'icon-chevron-down_L'" :items="dataDepartmentNames"
+                v-model="dataEmployeeOutput.DepartmentName" :inputError="isInvalidDepartment"
+                @keydown.tab="isHideCombobox = true"></m-input-combobox>
+              <div class="input-error-mess" :class="{ 'tag-hidden': !isEmptyDepartment }">
                 Đơn vị không được để trống
               </div>
             </div>
             <!-- Chức danh -->
             <div class="emp-title">
-              <label for="position" @click="onFocusInput('position')"
-                >Chức danh</label
-              >
-              <m-input
-                ref="position"
-                v-model="dataEmployeeOutput.PositionName"
-              ></m-input>
+              <label for="position" @click="onFocusInput('position')">Chức danh</label>
+              <m-input ref="position" v-model="dataEmployeeOutput.PositionName"></m-input>
             </div>
           </div>
 
@@ -118,74 +69,41 @@
             <div style="display: flex">
               <!-- Ngày sinh -->
               <div class="emp-birthday">
-                <label for="dateOfBirth" @click="onFocusInput('dateOfBirth')"
-                  >Ngày sinh</label
-                >
-                <m-input-datepicker
-                  tabindex="5"
-                  ref="dateOfBirth"
-                  v-model:isHideDatePicker="isHideDatePicker"
-                  v-model="dateOfBirth"
-                  :inputError="isInvalidDateOfBirth"
-                  @keydown.tab="isHideDatePicker = true"
-                ></m-input-datepicker>
+                <label for="dateOfBirth" @click="onFocusInput('dateOfBirth')">Ngày sinh</label>
+                <m-input-datepicker tabindex="5" ref="dateOfBirth" v-model:isHideDatePicker="isHideDatePicker"
+                  v-model="dateOfBirth" :inputError="isInvalidDateOfBirth"
+                  @keydown.tab="isHideDatePicker = true"></m-input-datepicker>
               </div>
 
               <!-- Giới tính -->
               <div class="emp-gender">
-                <label for="gender" @click="onFocusInput('gender')"
-                  >Giới tính</label
-                >
-                <m-input-radio
-                  ref="gender"
-                  :items="dataGender"
-                  v-model="picked"
-                ></m-input-radio>
+                <label for="gender" @click="onFocusInput('gender')">Giới tính</label>
+                <m-input-radio ref="gender" :items="dataGender" v-model="picked"></m-input-radio>
               </div>
             </div>
 
             <div class="box-id-card">
               <!-- Số chứng minh nhân dân -->
               <div class="emp-id">
-                <label
-                  for="identityNumber"
-                  title="Số chứng minh nhân dân"
-                  @click="onFocusInput('identityNumber')"
-                  >Số CMND</label
-                >
-                <m-input
-                  ref="identityNumber"
-                  v-model="dataEmployeeOutput.IdentityNumber"
-                ></m-input>
+                <label for="identityNumber" title="Số chứng minh nhân dân" @click="onFocusInput('identityNumber')">Số
+                  CMND</label>
+                <m-input ref="identityNumber" v-model="dataEmployeeOutput.IdentityNumber"></m-input>
               </div>
               <!-- Ngày cấp -->
               <div class="emp-id-datepicker">
                 <!-- <div class="date-picker"> -->
-                  <label
-                    for="identityDate"
-                    @click="onFocusInput('identityDate')"
-                    >Ngày cấp</label
-                  >
-                  <m-input-datepicker
-                    ref="identityDate"
-                    v-model:isHideDatePicker="isHideDatePicker"
-                    v-model="identityDate"
-                    :inputError="isInvalidIdentityDate"
-                    @keydown.tab="isHideDatePicker = true"
-                  ></m-input-datepicker>
+                <label for="identityDate" @click="onFocusInput('identityDate')">Ngày cấp</label>
+                <m-input-datepicker ref="identityDate" v-model:isHideDatePicker="isHideDatePicker"
+                  v-model="identityDate" :inputError="isInvalidIdentityDate"
+                  @keydown.tab="isHideDatePicker = true"></m-input-datepicker>
                 <!-- </div> -->
               </div>
             </div>
 
             <!-- Nơi cấp -->
             <div class="emp-id-place">
-              <label for="identityPlace" @click="onFocusInput('identityPlace')"
-                >Nơi cấp</label
-              >
-              <m-input
-                ref="identityPlace"
-                v-model="dataEmployeeOutput.IdentityPlace"
-              ></m-input>
+              <label for="identityPlace" @click="onFocusInput('identityPlace')">Nơi cấp</label>
+              <m-input ref="identityPlace" v-model="dataEmployeeOutput.IdentityPlace"></m-input>
             </div>
           </div>
         </div>
@@ -193,13 +111,8 @@
         <!-- Nhóm thứ hai - địa chỉ -->
         <div class="group-2">
           <div class="emp-address">
-            <label for="address" @click="onFocusInput('address')"
-              >Địa chỉ</label
-            >
-            <m-input
-              ref="address"
-              v-model="dataEmployeeOutput.Address"
-            ></m-input>
+            <label for="address" @click="onFocusInput('address')">Địa chỉ</label>
+            <m-input ref="address" v-model="dataEmployeeOutput.Address"></m-input>
           </div>
         </div>
 
@@ -207,73 +120,40 @@
         <div class="group-3">
           <!-- Số điện thoại di động -->
           <div class="emp-mobile-phone">
-            <label
-              for="mobilePhoneNumber"
-              @click="onFocusInput('mobilePhoneNumber')"
-              title="Điện thoại di động"
-              >ĐT di động</label
-            >
-            <m-input
-              ref="mobilePhoneNumber"
-              v-model="dataEmployeeOutput.MobilePhoneNumber"
-            ></m-input>
+            <label for="mobilePhoneNumber" @click="onFocusInput('mobilePhoneNumber')" title="Điện thoại di động">ĐT di
+              động</label>
+            <m-input ref="mobilePhoneNumber" v-model="dataEmployeeOutput.MobilePhoneNumber"></m-input>
           </div>
           <!-- Số điện thoại cố định -->
           <div class="emp-landline-phone">
-            <label
-              for="telephoneNumber"
-              @click="onFocusInput('telephoneNumber')"
-              title="Điện thoại cố định"
-              >ĐT cố định</label
-            >
-            <m-input
-              ref="telephoneNumber"
-              v-model="dataEmployeeOutput.TelephoneNumber"
-            ></m-input>
+            <label for="telephoneNumber" @click="onFocusInput('telephoneNumber')" title="Điện thoại cố định">ĐT cố
+              định</label>
+            <m-input ref="telephoneNumber" v-model="dataEmployeeOutput.TelephoneNumber"></m-input>
           </div>
           <!-- Địa chỉ email -->
           <div class="emp-email">
             <label for="email" @click="onFocusInput('email')">Email</label>
-            <m-input
-              ref="email"
-              v-model="dataEmployeeOutput.Email"
-              :inputError="isInvalidEmail"
-            ></m-input>
+            <m-input ref="email" v-model="dataEmployeeOutput.Email" :inputError="isInvalidEmail"></m-input>
           </div>
         </div>
-        
+
         <!-- Nhóm thứ tư-->
         <div class="group-4">
           <!-- Tài khoản ngân hàng -->
           <div class="emp-bank-account">
-            <label for="bankAccount" @click="onFocusInput('bankAccount')"
-              >Tài khoản ngân hàng</label
-            >
-            <m-input
-              ref="bankAccount"
-              v-model="dataEmployeeOutput.BankAccount"
-            ></m-input>
+            <label for="bankAccount" @click="onFocusInput('bankAccount')">Tài khoản ngân hàng</label>
+            <m-input ref="bankAccount" v-model="dataEmployeeOutput.BankAccount"></m-input>
           </div>
           <!-- Tên ngân hàng -->
           <div class="emp-bank-name">
-            <label for="bankName" @click="onFocusInput('bankName')"
-              >Tên ngân hàng</label
-            >
-            <m-input
-              ref="bankName"
-              v-model="dataEmployeeOutput.BankName"
-            ></m-input>
+            <label for="bankName" @click="onFocusInput('bankName')">Tên ngân hàng</label>
+            <m-input ref="bankName" v-model="dataEmployeeOutput.BankName"></m-input>
           </div>
           <!-- Chi nhánh ngân hàng -->
           <div class="emp-bank-branch">
-            <label for="bankBranch" @click="onFocusInput('bankBranch')"
-              >Chi nhánh</label
-            >
-            <m-input
-              ref="bankBranch"
-              v-model="dataEmployeeOutput.BankBranch"
-              @keydown.tab.prevent="onFocusInput('save')"
-            ></m-input>
+            <label for="bankBranch" @click="onFocusInput('bankBranch')">Chi nhánh</label>
+            <m-input ref="bankBranch" v-model="dataEmployeeOutput.BankBranch"
+              @keydown.tab.prevent="onFocusInput('save')"></m-input>
           </div>
         </div>
       </div>
@@ -281,32 +161,14 @@
       <!-- Phần chân form -->
       <div class="form-footer">
         <div class="left-btn">
-          <m-button
-            tabindex="19"
-            ref="cancel"
-            class="minor-button"
-            :title="'Hủy'"
-            @click="onCancelForm"
-            @keydown.enter="onCancelForm"
-          ></m-button>
+          <m-button tabindex="19" ref="cancel" class="minor-button" :title="'Hủy'" @click="onCancelForm"
+            @keydown.enter="onCancelForm"></m-button>
         </div>
         <div class="right-btn">
-          <m-button
-            tabindex="17"
-            ref="save"
-            class="minor-button"
-            :title="'Cất'"
-            @click.prevent="onSaveEmployee"
-            @keydown.enter="onSaveEmployee"
-          ></m-button>
-          <m-button
-            tabindex="18"
-            ref="saveAndAdd"
-            class="main-button"
-            :title="'Cất và thêm'"
-            @click="onSaveAndAddEmployee"
-            @keydown.enter="onSaveAndAddEmployee"
-          ></m-button>
+          <m-button tabindex="17" ref="save" class="minor-button" :title="'Cất'" @click.prevent="onSaveEmployee"
+            @keydown.enter="onSaveEmployee"></m-button>
+          <m-button tabindex="18" ref="saveAndAdd" class="main-button" :title="'Cất và thêm'"
+            @click="onSaveAndAddEmployee" @keydown.enter="onSaveAndAddEmployee"></m-button>
         </div>
       </div>
     </div>
@@ -799,40 +661,33 @@ export default {
      * author: ttkien (19/09/2023)
      * lấy tất cả đơn vị
      */
-    getAllDepartment() {
-      this.$axios
-        .get("https://localhost:7114/api/v1/Departments")
-        .then((res) => {
-          // console.log(res);
-          this.dataDepartments = res.data;
-        })
-        .catch(this.$helper.showError);
+    async getAllDepartment() {
+      try {
+        this.dataDepartments = await this.$api.getAllDepartmentAsync();
+      } catch (error) {
+        this.dataDepartments = {};
+        this.$helper.showError(error);
+      }
     },
 
     /**
      * author: ttkien (21/09/2023)
      * Hàm thêm mới dữ liệu
      */
-    insertEmployee() {
-      this.$axios
-        .post(
-          "https://localhost:7114/api/v1/Employees",
-          this.dataEmployeeOutput
-        )
-        .then((res) => {
-          console.log(res);
-          this.newToastMsgSuccess(
-            this.$MISAResource["VN"].toastMessage.addEmployeeSuccessfull
-          );
-          this.onCloseForm();
-          this.$emit("reloadData");
-          if (this.isWaiting === "save and add") {
-            this.$emit("createNewForm");
-          }
-        })
-        .catch((error) => {
-          this.newToastMsgError(error);
-        });
+    async insertEmployee() {
+      try {
+        await this.$api.insertEmployeeAsync(this.dataEmployeeOutput);
+        this.newToastMsgSuccess(
+          this.$MISAResource["VN"].toastMessage.addEmployeeSuccessfull
+        );
+        this.onCloseForm();
+        this.$emit("reloadData");
+        if (this.isWaiting === "save and add") {
+          this.$emit("createNewForm");
+        }
+      } catch (error) {
+        this.newToastMsgError(error);
+      };
       this.validateInput = false;
     },
 
@@ -840,26 +695,20 @@ export default {
      * author: ttkien (21/09/2023)
      * Hàm sửa dữ liệu
      */
-    editEmployee() {
-      this.$axios
-        .put(
-          `https://localhost:7114/api/v1/Employees/${this.employeeId}`,
-          this.dataEmployeeOutput
-        )
-        .then((res) => {
-          console.log(res);
-          this.newToastMsgSuccess(
-            this.$MISAResource["VN"].toastMessage.changeEmployeeSuccessfull
-          );
-          this.onCloseForm();
-          this.$emit("reloadData");
-          if (this.isWaiting === "save and add") {
-            this.$emit("createNewForm");
-          }
-        })
-        .catch((error) => {
-          this.newToastMsgError(error);
-        });
+    async editEmployee() {
+      try {
+        await this.$api.updateEmployeeAsync(this.employeeId, this.dataEmployeeOutput);
+        this.newToastMsgSuccess(
+          this.$MISAResource["VN"].toastMessage.changeEmployeeSuccessfull
+        );
+        this.onCloseForm();
+        this.$emit("reloadData");
+        if (this.isWaiting === "save and add") {
+          this.$emit("createNewForm");
+        }
+      } catch (error) {
+        this.newToastMsgError(error);
+      };
       this.validateInput = false;
     },
   },
